@@ -1,10 +1,10 @@
 import api from "./api"
 
-export async function doLogin(email, password){
+export async function doLogin(email, senha){
   if(!email || !senha) return null
   try {
-    const result = await api.post('/login', {email, password})
-    console.log(resultado)
+    const result = await api.post('/login', {email, senha})
+    //console.log(result)
     return result.data
   }
   catch(error) {
@@ -12,3 +12,4 @@ export async function doLogin(email, password){
     return null
   }
 }
+

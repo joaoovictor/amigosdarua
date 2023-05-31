@@ -1,38 +1,70 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import {View, StyleSheet, SafeAreaView, Image, Text} from 'react-native'
 import {MainButton, TextButton ,Input, Logo, SubtitleText, TitleText, YellowSubtitle } from "../../styles"
 import { doLogin } from "../services/AuthService"
 import { useNavigation } from "@react-navigation/native";
+import Toast from 'react-native-toast-message'
+import jwtDecode from 'jwt-decode';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export default function Login() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [carregando, setCarregando] = useState(true)
+
+  useEffect(() => {
+    async function verificarLogin(){
+      const token = await AsyncStorage.getItem('token')
+      if(token){
+        navigation.replace('Tabs')
+      }
+      setCarregando(false)
+    }
+    verificarLogin()
+  },[])
 
   async function login(){
-    const result = await doLogin(email, passoword)
+    const result = await doLogin(email, password)
+    console.log(result)
     if(result){
+      const { token } = result
+      console.log(token)
+      AsyncStorage.setItem('token', token)
+      const tokenDecodificado = jwtDecode(token)
+      console.log(tokenDecodificado)
+      console.log(token)
+      //AsyncStorage.setItem('userID', userID)
       navigation.replace('Tabs')
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: 'Erro ao realizar o login',
+        text2: 'Verifique suas credencias e tente novamente',
+        position: 'bottom',
+        visibilityTime: 3000
+      });
     }
   }
 
   return (
+
     <SafeAreaView style={stylesLogin.mainView}>
-      <View style={stylesLogin.contentView}>
-        <View style={{flex: 4, justifyContent: 'space-around'}}>
-          <Logo>amigosdarua</Logo>
-          <Image source={require('../../assets/lock.png')} style={{alignSelf: 'center'}}/>
-          <View>
-          <TitleText>Realize seu login!</TitleText>
-          <SubtitleText>Keep It Safe!</SubtitleText>
-          </View>
-          
+        <View style={stylesLogin.contentView}>
+          <View style={{flex: 4, justifyContent: 'space-around'}}>
+            <Logo>amigosdarua</Logo>
+            <Image source={require('../../assets/lock.png')} style={{alignSelf: 'center'}}/>
+            <View>
+            <TitleText>Realize seu login!</TitleText>
+            <SubtitleText>Keep It Safe!</SubtitleText>
+            </View>
         </View>
        
         <View style={{width: '90%', flex: 4, justifyContent: 'space-evenly'}}>
-          <Input placeholder="Email" secureTextEntry={false} onChangeText={setEmail} />
-          <Input placeholder="Senha" secureTextEntry={true} onChangeText={setPassword} />
-          <MainButton onPress={() => navigation.replace('Tabs')}> 
+          <Input placeholder="Email" value={email} secureTextEntry={false} onChangeText={setEmail} />
+          <Input placeholder="Senha" value={password} secureTextEntry={true} onChangeText={setPassword} />
+          <MainButton onPress={login}> 
             <TextButton>Login</TextButton>
           </MainButton>
           <YellowSubtitle>Esqueceu sua senha?</YellowSubtitle>
@@ -40,13 +72,22 @@ export default function Login() {
       </View>
 
       <View style={stylesLogin.secondView}>
-          <SubtitleText>Não possuí conta? <YellowSubtitle>Registrar-se</YellowSubtitle></SubtitleText>
+          <SubtitleText>Não possuí conta? <YellowSubtitle onPress={() => navigation.navigate('Cadastro')}>Registrar-se</YellowSubtitle></SubtitleText>
       </View>
     </SafeAreaView>
+    
   )
 }
 
 const stylesLogin = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#F2F2F2',
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
   mainView: {
     flex: 1,
     backgroundColor: '#F2F2F2'
