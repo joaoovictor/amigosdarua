@@ -24,6 +24,7 @@ import {
   Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
 import Rotas from './src/Screens/Rotas';
+import Loading from './src/Screens/Loading';
 
 
 export default function App() {
@@ -49,7 +50,7 @@ export default function App() {
   });
 
   if(!fontsLoaded){
-    return <Text>Loading</Text> 
+    return <Loading/>
   } else {
     return <Rotas/>
   }

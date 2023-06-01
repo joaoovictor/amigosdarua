@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Perfil from "./Perfil";
 import Eventos from "./Eventos"
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import CadastroEventos from "./CadastroEventos";
 
 const Tab = createBottomTabNavigator()
 
@@ -17,12 +18,20 @@ const tabs = [
   {
     name: 'Eventos',
     component: Eventos,
-    icon: 'md-pin' 
+    icon: 'md-pin',
+    size: 28
+  },
+  {
+    name: 'Novo evento',
+    component: CadastroEventos,
+    icon: 'add-circle-sharp' ,
+    size: 35
   },
   {
     name: 'Perfil',
     component: Perfil,
-    icon: 'person-circle-outline' 
+    icon: 'person-circle-outline' ,
+    size: 28
   },
 ]
 
@@ -37,7 +46,7 @@ export default function Tabs() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name={tab.icon} size={size} color={color} />
+              <Ionicons name={tab.icon} size={tab.size} color={color} />
             )
           }}
         />

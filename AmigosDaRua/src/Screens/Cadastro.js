@@ -4,6 +4,7 @@ import {Input, Logo, MainButton, SubtitleText, TextButton, TitleText} from "../.
 import { useNavigation } from "@react-navigation/native";
 import { createResponsavel } from "../services/ResponsavelService"
 import Toast from 'react-native-toast-message'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Cadastro(){
   const [email, setEmail] = useState("")
@@ -24,14 +25,9 @@ export default function Cadastro(){
     })
 
     if(result){
-      Toast.show({
-        type: 'success',
-        text1: 'Seu cadastro foi realizado com sucesso!',
-        text2: 'Você já pode realizar seu login.',
-        position: 'bottom',
-        visibilityTime: 3000
-      });
-      navigation.replace('Login')
+      AsyncStorage.setItem('@idUsuarioCadastrado', JSON.stringify(result.id))
+      
+      navigation.replace('CadastroTipoPessoa') 
     } else {
       Toast.show({
         type: 'error',
@@ -58,7 +54,7 @@ export default function Cadastro(){
         <Input placeholder="Email" value={email} secureTextEntry={false} onChangeText={setEmail} />
         <Input placeholder="Senha" value={senha} secureTextEntry={true} onChangeText={setSenha} />
         <MainButton onPress={createResp}>
-          <TextButton>Cadastrar</TextButton>
+          <TextButton>Continuar</TextButton>
         </MainButton>
       </View>
     </SafeAreaView>

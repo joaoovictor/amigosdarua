@@ -7,7 +7,8 @@ import Cadastro from "./Cadastro";
 import Tabs from "../Tabs";
 import Toast from 'react-native-toast-message'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
+import CadastroTipoPessoa from "./CadastroTipoPessoa";
+import CadastroEventos from "../Tabs/CadastroEventos";
 const Tab = createNativeStackNavigator();
 
 export default function Rotas(){
@@ -27,6 +28,12 @@ export default function Rotas(){
         />
          <Tab.Screen 
           name="Cadastro" component={Cadastro} options={{ headerShown: false }}
+        />
+        <Tab.Screen 
+          name="CadastroTipoPessoa" component={CadastroTipoPessoa} options={{ headerShown: false }}
+        />
+        <Tab.Screen 
+          name="CadastroEvento" component={CadastroEventos} options={{ headerShown: false }}
         />
       </Tab.Navigator>
     </NavigationContainer>

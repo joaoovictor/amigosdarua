@@ -16,26 +16,32 @@ export default function Login() {
 
   useEffect(() => {
     async function verificarLogin(){
-      const token = await AsyncStorage.getItem('token')
+      const usuario = await AsyncStorage.getItem('@user')
+      if(usuario){
+        const parse = JSON.parse(usuario)
+      const {token} = parse
       if(token){
         navigation.replace('Tabs')
       }
       setCarregando(false)
+      } 
+      
     }
     verificarLogin()
   },[])
 
   async function login(){
     const result = await doLogin(email, password)
-    console.log(result)
     if(result){
       const { token } = result
-      console.log(token)
-      AsyncStorage.setItem('token', token)
-      const tokenDecodificado = jwtDecode(token)
-      console.log(tokenDecodificado)
-      console.log(token)
-      //AsyncStorage.setItem('userID', userID)
+      const { idUsuario } = result
+      const tokenDecodificado = jwtDecode(token.token)
+      const usuario = {
+        id:idUsuario,
+        email: tokenDecodificado.sub,
+        token: token.token
+      }
+      AsyncStorage.setItem('@user', JSON.stringify(usuario))
       navigation.replace('Tabs')
     } else {
       Toast.show({
