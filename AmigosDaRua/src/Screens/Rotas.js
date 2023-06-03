@@ -13,11 +13,7 @@ const Tab = createNativeStackNavigator();
 
 export default function Rotas(){
   return(
-    <KeyboardAwareScrollView
-    contentContainerStyle={stylesLogin.scrollViewContent}
-    style={stylesLogin.scrollView}
-    keyboardShouldPersistTaps="handled"
-  >
+ 
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen 
@@ -36,9 +32,10 @@ export default function Rotas(){
           name="CadastroEvento" component={CadastroEventos} options={{ headerShown: false }}
         />
       </Tab.Navigator>
+      <Toast/>
     </NavigationContainer>
-    <Toast/>
-    </KeyboardAwareScrollView>
+  
+   
   )
 }
 

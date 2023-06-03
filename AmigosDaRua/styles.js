@@ -60,3 +60,10 @@ export const Input = styled.TextInput`
   padding-left: 15px;
 `
 
+export const TextCreate = styled.Text`
+  font-family: 'Poppins_600SemiBold';
+  font-style: normal;
+  font-size: 16px;
+  color: #0073D8;
+`
+
