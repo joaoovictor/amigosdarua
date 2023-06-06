@@ -1,2 +1,2 @@
 # amigosdarua
-Projeto "Amigos da Rua" destinado a Global Solution 1/2023 das turmas de Desenvolvimento de Sistemas da FIAP.
+![alt text]([http://url/to/img.png](https://drive.google.com/file/d/1q4V-87far-xW0JpsFD1-AvIq5t7qdXia/view?usp=sharing))
