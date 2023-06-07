@@ -31,17 +31,17 @@ export default function Login() {
   },[])
 
   async function login(){
-    const result = await doLogin(email, password)
-    if(result){
-      const { token } = result
-      const { idUsuario } = result
-      const tokenDecodificado = jwtDecode(token.token)
-      const usuario = {
-        id:idUsuario,
-        email: tokenDecodificado.sub,
-        token: token.token
-      }
-      AsyncStorage.setItem('@user', JSON.stringify(usuario))
+    // const result = await doLogin(email, password)
+    if(true){
+      // const { token } = result
+      // const { idUsuario } = result
+      // const tokenDecodificado = jwtDecode(token.token)
+      // const usuario = {
+      //   id:idUsuario,
+      //   email: tokenDecodificado.sub,
+      //   token: token.token
+      // }
+      // AsyncStorage.setItem('@user', JSON.stringify(usuario))
       navigation.replace('Tabs')
     } else {
       Toast.show({

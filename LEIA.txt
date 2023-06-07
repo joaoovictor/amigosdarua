@@ -1,0 +1,9 @@
+Vídeo com Apresentação do App funcionando com back-end: https://www.youtube.com/watch?v=lh4Kk-8Y0gI
+
+Github com Readme e endpoints: https://github.com/joaoovictor/amigosdarua
+
+Guilherme De Jesus Ferreira - RM: 95542
+João Victor Oliveira Da Silva - RM: 94231
+Davi Oliveira Da Silva - RM: 95535
+Abner Rodrigues Ferreira - RM: 93576
+Emerson Figueredo Nascimento Silva - RM:95199
