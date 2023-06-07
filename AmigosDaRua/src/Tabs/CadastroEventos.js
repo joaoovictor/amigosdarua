@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { SafeAreaView, View, TextInput, StyleSheet, ScrollView, Text} from 'react-native'
+import { SafeAreaView, View, TextInput, StyleSheet} from 'react-native'
 import { Logo, TextCreate, SubtitleText } from '../../styles'
 import Linha from '../components/Linha'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
@@ -23,7 +23,17 @@ export default function CadastroEventos(){
     const [data, setData] = useState(new Date())
     const [token, setToken] = useState("")
     const [userId, setUserId] = useState(0)
-    
+    function clearFields(){
+      setLat(0)
+      setLng(0)
+      setLocal("")
+      setNomeEvento("")
+      setDataInicio(new Date())
+      setDataFim(new Date())
+      setData(new Date())
+    }
+
+
     useEffect(() => {
       getToken().then((info) => {
         setToken(info)
@@ -73,6 +83,8 @@ export default function CadastroEventos(){
           position: 'bottom',
           visibilityTime: 3000
         });
+
+        clearFields()
       } else {
         Toast.show({
           type: 'error',

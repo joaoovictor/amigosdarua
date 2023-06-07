@@ -15,8 +15,7 @@ import api from '../services/api';
 
 export default function Eventos(props){
   const [eventos, setEventos] = useState([])
-  let events = [];
-
+  
   useEffect(() => {
 
     fetchData()
@@ -25,7 +24,9 @@ export default function Eventos(props){
   
   const fetchData = async () => {
     try{
-      const response = await api.get('/evento/disponivel')
+      const response = await api.get('/evento/disponivel', {params: {
+        size: 8
+      }})
       const jsonData = await response.data._embedded.getEventoModelList
       setEventos(jsonData)
     }catch(e){

@@ -9,6 +9,7 @@ import Toast from 'react-native-toast-message'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CadastroTipoPessoa from "./CadastroTipoPessoa";
 import CadastroEventos from "../Tabs/CadastroEventos";
+import PaginaAtualizacaoDados from "../Tabs/PaginaAtualizacaoDados";
 const Tab = createNativeStackNavigator();
 
 export default function Rotas(){
@@ -30,6 +31,9 @@ export default function Rotas(){
         />
         <Tab.Screen 
           name="CadastroEvento" component={CadastroEventos} options={{ headerShown: false }}
+        />
+         <Tab.Screen 
+          name="EditarDados" component={PaginaAtualizacaoDados} options={{ headerShown: false }}
         />
       </Tab.Navigator>
       <Toast/>
